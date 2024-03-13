@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clo835-mysql-deployment
+spec:
+  replicas: 1  # Assuming 1 replica for the MySQL application
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+        #app-type: employees
+    spec:
+      containers:
+        - name: mysql-container
+          image: 257315592381.dkr.ecr.us-east-1.amazonaws.com/nmbhatt-repo:db_v0.1
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "pw"

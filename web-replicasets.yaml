@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: clo835-webapp-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      containers:
+        - name: clo835-container
+          image: 257315592381.dkr.ecr.us-east-1.amazonaws.com/nmbhatt-repo:app_v0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DBHOST
+              value: "10.244.0.5"
+            - name: DBUSER
+              value: "root"
+            - name: DBPWD
+              value: "pw"
+            - name: DATABASE
+              value: "employees"
+            - name: DBPORT
+              value: "3306"
+            - name: APP_COLOR
+              value: "pink" # Or any other supported color
